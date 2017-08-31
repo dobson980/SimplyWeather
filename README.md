@@ -14,3 +14,7 @@ City Search Examples:<br />
 "San Diego CA"<br />
 "Rio De Jeneiro Brazil"<br />
 "New York City"<br />
+
+Pods Used:<br />
+SwiftyJson<br />
+AlamoFire<br />
