@@ -4,12 +4,12 @@ This app and all its assets were built from the ground up by myself.
 
 ![SCREENSHOT](SimplyWeather.gif)
 
-Features:
-Long Press to Refresh Data
-Swipe left to change location
-Utilizes: https://www.wunderground.com/weather/api
+Features:<br />
+Long Press to Refresh Data<br />
+Swipe left to change location<br />
+Utilizes: https://www.wunderground.com/weather/api<br />
 
-City Search Examples:
-"San Diego CA"
-"Rio De Jeneiro Brazil"
-"New York City"
+City Search Examples:<br />
+"San Diego CA"<br />
+"Rio De Jeneiro Brazil"<br />
+"New York City"<br />
