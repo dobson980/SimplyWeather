@@ -2,6 +2,8 @@
 
 I built this app and all its assets from the ground up.
 
+**Note** looks best on iPhone 7+. Autolayout was not part of the scope of this project.
+
 ![SCREENSHOT](SimplyWeather.gif)
 
 Features:<br />
