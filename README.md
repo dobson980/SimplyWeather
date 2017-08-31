@@ -6,7 +6,7 @@ I built this app and all its assets from the ground up.
 
 Features:<br />
 Long Press to refresh data<br />
-Swipe left to change location<br />
+Swipe right to change location<br />
 Data autorefreshes when app is brought into foreground<br />
 
 
