@@ -22,6 +22,8 @@ protocol geoSelectedDelegate {
 
 class CitySelectVIewController: UIViewController{
     
+    // Mark: - Variables
+    
     @IBOutlet weak var modalImage: UIImageView!
     @IBOutlet weak var geoButton: UIButton!
     @IBOutlet weak var okButton: UIButton!
@@ -31,6 +33,8 @@ class CitySelectVIewController: UIViewController{
     var delegate : CitySelectDelegate?
     var geoDelegate: geoSelectedDelegate?
 
+    // Mark: - View Controller
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -49,6 +53,8 @@ class CitySelectVIewController: UIViewController{
         
         
     }
+    
+    // Mark: - Button Actions
     
     func sendCityButtonAction() {
         
@@ -93,6 +99,8 @@ class CitySelectVIewController: UIViewController{
         view.endEditing(true)
         super.touchesBegan(touches, with: event)
     }
+    
+    // Mark: - Notification Handling
     
     @objc func keyboardWillShow(notification: NSNotification) {
         

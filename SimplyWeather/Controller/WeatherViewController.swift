@@ -14,6 +14,8 @@ import SwiftyJSON
 
 class WeatherViewController: UIViewController, CLLocationManagerDelegate, CitySelectDelegate, geoSelectedDelegate {
     
+    // Mark: - Variables
+    
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var weatherIcon: UIImageView!
@@ -27,7 +29,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, CitySe
     var citySelected: String?
     var usingGPS = true
     
-    //Mark: - View
+    // Mark: - View
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,6 +114,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, CitySe
             if response.result.isSuccess {
                 
                 let weatherJSON : JSON  = JSON(response.result.value!)
+                print(weatherJSON)
                 self.queryUpdateLatLong(json: weatherJSON)
                 
             }  else {
@@ -138,7 +141,8 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, CitySe
             } else {
 
                 print("Error \(String(describing: response.result.error))")
-                self.cityLabel.text = "Connection Error"
+                self.weatherDataModel.city = "Connection Error"
+                self.updateUIwithErrorData()
 
             }
 
@@ -157,7 +161,8 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, CitySe
             } else {
                 
                 print("Error \(String(describing: response.result.error))")
-                self.cityLabel.text = "Connection Error"
+                self.weatherDataModel.city = "Connection Error"
+                self.updateUIwithErrorData()
                 
             }
             
@@ -166,15 +171,23 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, CitySe
     }
     
     
-    //MARK: - Parse JSON
+    // MARK: - Parse JSON
     
     func queryUpdateLatLong(json: JSON) {
         
         if let lat = json["RESULTS"][0]["lat"].string, let lon = json["RESULTS"][0]["lon"].string {
             
+            print(lat)
+            print(lon)
+            
             let weatherAPICall = WeatherAPI_URL(lat: lat, long: lon)
             
             getWeatherData(forcastData: weatherAPICall.fullForecastURL, conditionsData: weatherAPICall.fullConditionsURL)
+            
+        } else {
+            
+            weatherDataModel.city = "Can't Find City"
+            updateUIwithErrorData()
             
         }
     }
@@ -232,7 +245,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, CitySe
         
     }
     
-    //MARK: - UI Updates
+    // MARK: - UI Updates
     
     func updateUIWithWeatherData() {
         
@@ -246,7 +259,19 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, CitySe
         
     }
     
-    //MARK: - Gestures
+    func updateUIwithErrorData() {
+        
+        cityLabel.text = weatherDataModel.city
+        currentWeatherLabel.text = ""
+        temperatureLabel.text = ""
+        timeLabel.text = ""
+        dateLabel.text = ""
+        percipChanceLabel.text = "0%"
+        weatherIcon.image = #imageLiteral(resourceName: "uknown")
+        
+    }
+    
+    // MARK: - Gestures
     
     @objc func longTouchAction(gesture: UILongPressGestureRecognizer) {
         
@@ -274,7 +299,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, CitySe
             
     }
     
-    //MARK: - Delegates
+    // MARK: - Delegates
     
     func userEnteredAnewCityName(city: String) {
         
